@@ -1,0 +1,52 @@
+.feed {
+    padding: 16px;
+    display: grid;
+    gap: 16px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.ad-card {
+    border: 1px solid #eee;
+    padding: 12px;
+    border-radius: 8px;
+    background: #fff;
+}
+
+.ad-card img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.ad-card h3 {
+    margin: 8px 0 4px;
+}
+
+.ad-card p {
+    color: #555;
+}
+
+.empty-feed {
+    text-align: center;
+    margin-top: 40px;
+    color: #777;
+}
+
+.center-add-button {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 24px;
+    background-color: #007bff;
+    color: white;
+    font-size: 18px;
+    border-radius: 28px;
+    text-decoration: none;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    font-weight: 500;
+    z-index: 1000;
+}
+

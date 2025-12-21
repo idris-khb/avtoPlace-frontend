@@ -1,0 +1,45 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    border-bottom: 1px solid #ddd;
+    background-color: #fff;
+}
+
+.logo {
+    font-weight: bold;
+    font-size: 24px;
+    color: #000; /* добавь цвет явно */
+}
+
+.search-container {
+    position: relative;
+    flex-grow: 1;
+    max-width: 500px;
+    margin: 0 20px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 8px 40px 8px 12px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.search-icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.profile-btn {
+    padding: 8px 12px;
+    font-size: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}

@@ -1,0 +1,148 @@
+.photo-upload {
+    display: inline-block;
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff; /* тот же цвет, что у кнопки Опубликовать */
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.2s, transform 0.1s;
+    margin-top: 12px;
+}
+
+.photo-upload:hover {
+    background-color: #0056b3;
+    transform: translateY(-1px);
+}
+
+.photo-upload:active {
+    background-color: #004080;
+    transform: translateY(0);
+}
+
+.add-car {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 16px;
+}
+
+.add-car-form input {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.add-car-form button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 16px;
+    background-color: #007bff;
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.add-car-form button:hover {
+    background-color: #0056b3;
+}
+
+.brand-field {
+    position: relative;
+    margin: 10px 0;
+}
+
+.brand-input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.brand-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #ccc;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 10;
+    border-radius: 4px;
+}
+
+.brand-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    cursor: pointer;
+}
+
+.brand-item:hover {
+    background-color: #f0f0f0;
+}
+
+.brand-item img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
+
+.photo-section {
+    margin-top: 12px;
+}
+
+.photo-upload {
+    display: inline-block;
+    padding: 10px 14px;
+    background-color: #f5f5f5;
+    cursor: pointer;
+    font-weight: 500;
+    border-radius: 4px;
+}
+
+.photo-preview {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.photo-item {
+    position: relative;
+}
+
+.photo-item img {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.photo-item button {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    font-size: 14px;
+    line-height: 1;
+}
