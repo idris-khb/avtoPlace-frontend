@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Header.css";
 
 export default function Header() {
     const [search, setSearch] = useState("");
+    const navigate = useNavigate();
 
     return (
         <header className="header">
@@ -22,7 +24,10 @@ export default function Header() {
             </div>
 
             {/* Кнопка профиля справа */}
-            <button className="profile-btn">👤</button>
+            <button className="profile-btn"
+                    onClick={() => navigate("/register")}>
+                👤
+            </button>
         </header>
     );
 }
