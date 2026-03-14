@@ -1,37 +1,60 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./RegisterPage.css";
+import { registerUser, loginUser } from "../api";
 
 export default function RegisterPage() {
-    const [isLogin, setIsLogin] = useState(true); // true — вход, false — регистрация
+    const navigate = useNavigate();
+
+    const [isLogin, setIsLogin] = useState(true); // true — сначала вход
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        setError("");
 
         if (!email || !password) {
-            alert("Пожалуйста, заполните все поля");
+            setError("Заполните все поля");
             return;
         }
 
         if (!isLogin && password !== confirmPassword) {
-            alert("Пароли не совпадают");
+            setError("Пароли не совпадают");
             return;
         }
 
-        if (isLogin) {
-            console.log("Вход:", { email, password });
-            // TODO: вызов login API
-        } else {
-            console.log("Регистрация:", { email, password });
-            // TODO: вызов register API
-        }
+        setLoading(true);
+        try {
+            let data;
+            if (isLogin) {
+                data = await loginUser(email, password);
+            } else {
+                data = await registerUser(email, password);
+                // после регистрации сразу показываем вход
+                setIsLogin(true);
+                setEmail("");
+                setPassword("");
+                setConfirmPassword("");
+                return;
+            }
 
-        // Очистка полей после отправки
-        setEmail("");
-        setPassword("");
-        setConfirmPassword("");
+            console.log("Успешный вход:", data);
+
+            // Сохраняем токен
+            localStorage.setItem("token", data.token);
+            localStorage.setItem("user", JSON.stringify({ id: data.id, email: data.email }));
+
+            // Редирект на главную страницу
+            navigate("/");
+        } catch (err: any) {
+            setError(err.message || "Ошибка сервера");
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -61,23 +84,27 @@ export default function RegisterPage() {
                         required
                     />
                 )}
-                <button type="submit">{isLogin ? "Войти" : "Зарегистрироваться"}</button>
+                <button type="submit" disabled={loading}>
+                    {loading ? "Загрузка..." : isLogin ? "Войти" : "Зарегистрироваться"}
+                </button>
             </form>
+
+            {error && <p className="error">{error}</p>}
 
             <p className="toggle-login">
                 {isLogin ? (
                     <>
                         Нет аккаунта?{" "}
                         <span className="link" onClick={() => setIsLogin(false)}>
-                            Зарегистрироваться
-                        </span>
+              Зарегистрироваться
+            </span>
                     </>
                 ) : (
                     <>
                         Уже есть аккаунт?{" "}
                         <span className="link" onClick={() => setIsLogin(true)}>
-                            Войти
-                        </span>
+              Войти
+            </span>
                     </>
                 )}
             </p>
