@@ -1,0 +1,39 @@
+.myads-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.myads-header h3 {
+    margin: 0;
+}
+
+/* КНОПКА */
+.add-ad-btn {
+    background: #4f46e5;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.add-ad-btn:hover {
+    background: #4338ca;
+    transform: translateY(-1px);
+}
+
+.add-ad-btn:active {
+    transform: scale(0.97);
+}
+
+/* СПИСОК */
+.myads-list {
+    background: #f9fafb;
+    padding: 20px;
+    border-radius: 12px;
+    min-height: 150px;
+}

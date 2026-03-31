@@ -2,7 +2,7 @@ export const API_BASE = "http://localhost:8080"; // API Gateway
 
 // src/api.ts
 export const registerUser = async (email: string, password: string) => {
-    const res = await fetch(`${API_BASE}/users`, {
+    const res = await fetch(`${API_BASE}/auth/register`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -19,7 +19,7 @@ export const registerUser = async (email: string, password: string) => {
 };
 
 export const loginUser = async (email: string, password: string) => {
-    const res = await fetch(`${API_BASE}/users/login`, {
+    const res = await fetch(`${API_BASE}/auth/login`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

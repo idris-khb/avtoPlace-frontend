@@ -2,11 +2,13 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./RegisterPage.css";
 import { registerUser, loginUser } from "../api";
+import { useAuth } from "../context/AuthContext";
 
 export default function RegisterPage() {
     const navigate = useNavigate();
+    const { login } = useAuth();
 
-    const [isLogin, setIsLogin] = useState(true); // true — сначала вход
+    const [isLogin, setIsLogin] = useState(true);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -28,28 +30,30 @@ export default function RegisterPage() {
         }
 
         setLoading(true);
+
         try {
             let data;
+
             if (isLogin) {
+                // 🔐 LOGIN
                 data = await loginUser(email, password);
             } else {
+                // 🆕 REGISTER
                 data = await registerUser(email, password);
-                // после регистрации сразу показываем вход
-                setIsLogin(true);
-                setEmail("");
-                setPassword("");
-                setConfirmPassword("");
-                return;
             }
 
-            console.log("Успешный вход:", data);
+            console.log("Успех:", data);
 
-            // Сохраняем токен
-            localStorage.setItem("token", data.token);
-            localStorage.setItem("user", JSON.stringify({ id: data.id, email: data.email }));
+            if (data?.token) {
+                // ✅ сохраняем через context
+                login({ email }, data.token);
 
-            // Редирект на главную страницу
-            navigate("/");
+                // 🚀 редирект
+                navigate("/");
+            } else {
+                setError("Не получен токен");
+            }
+
         } catch (err: any) {
             setError(err.message || "Ошибка сервера");
         } finally {
@@ -60,6 +64,7 @@ export default function RegisterPage() {
     return (
         <div className="register-page">
             <h1>{isLogin ? "Вход" : "Регистрация"}</h1>
+
             <form onSubmit={handleSubmit} className="register-form">
                 <input
                     type="email"
@@ -68,6 +73,7 @@ export default function RegisterPage() {
                     onChange={(e) => setEmail(e.target.value)}
                     required
                 />
+
                 <input
                     type="password"
                     placeholder="Пароль"
@@ -75,6 +81,7 @@ export default function RegisterPage() {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                 />
+
                 {!isLogin && (
                     <input
                         type="password"
@@ -84,8 +91,13 @@ export default function RegisterPage() {
                         required
                     />
                 )}
+
                 <button type="submit" disabled={loading}>
-                    {loading ? "Загрузка..." : isLogin ? "Войти" : "Зарегистрироваться"}
+                    {loading
+                        ? "Загрузка..."
+                        : isLogin
+                            ? "Войти"
+                            : "Зарегистрироваться"}
                 </button>
             </form>
 
@@ -95,16 +107,22 @@ export default function RegisterPage() {
                 {isLogin ? (
                     <>
                         Нет аккаунта?{" "}
-                        <span className="link" onClick={() => setIsLogin(false)}>
-              Зарегистрироваться
-            </span>
+                        <span
+                            className="link"
+                            onClick={() => setIsLogin(false)}
+                        >
+                            Зарегистрироваться
+                        </span>
                     </>
                 ) : (
                     <>
                         Уже есть аккаунт?{" "}
-                        <span className="link" onClick={() => setIsLogin(true)}>
-              Войти
-            </span>
+                        <span
+                            className="link"
+                            onClick={() => setIsLogin(true)}
+                        >
+                            Войти
+                        </span>
                     </>
                 )}
             </p>

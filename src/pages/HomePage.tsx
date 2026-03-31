@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import type { CarAd } from "../types/CarAd";
 import "./HomePage.css";
@@ -32,9 +31,6 @@ export default function HomePage({ ads }: Props) {
                     </div>
                 ))}
             </div>
-
-            {/* Кнопка добавления объявления внизу по центру */}
-            <Link to="/add-car" className="center-add-button">+ Добавить объявление</Link>
         </>
     );
 }
