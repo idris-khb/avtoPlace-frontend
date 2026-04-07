@@ -1,36 +1,44 @@
+import { useEffect, useState } from "react";
 import Header from "../components/Header";
+import AdList from "../components/AdList";
 import type { CarAd } from "../types/CarAd";
-import "./HomePage.css";
 
-interface Props {
-    ads: CarAd[];
-}
+export default function HomePage() {
+    const [ads, setAds] = useState<CarAd[]>([]);
+    const [loading, setLoading] = useState(true);
 
-export default function HomePage({ ads }: Props) {
+    useEffect(() => {
+        fetch("http://localhost:8080/media/api/ads")
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error("Ошибка загрузки");
+                }
+                return res.json();
+            })
+            .then(data => {
+                setAds(data);
+            })
+            .catch(err => {
+                console.error("Ошибка:", err);
+            })
+            .finally(() => {
+                setLoading(false);
+            });
+    }, []);
+
     return (
         <>
             <Header />
 
-            <div className="feed">
-                {ads.length === 0 && (
-                    <p className="empty-feed">
-                        Пока нет объявлений. Добавьте первое авто.
-                    </p>
-                )}
+            {loading && <p>Загрузка...</p>}
 
-                {ads.map((ad) => (
-                    <div key={ad.id} className="ad-card">
-                        {ad.photos[0] && (
-                            <img
-                                src={ad.photos[0]}
-                                alt={`${ad.brand} ${ad.model}`}
-                            />
-                        )}
-                        <h3>{ad.brand} {ad.model}</h3>
-                        <p>{ad.price.toLocaleString()} ₸</p>
-                    </div>
-                ))}
-            </div>
+            {!loading && ads.length === 0 && (
+                <p>Нет объявлений</p>
+            )}
+
+            {!loading && ads.length > 0 && (
+                <AdList ads={ads} />
+            )}
         </>
     );
 }

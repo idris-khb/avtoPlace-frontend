@@ -12,42 +12,61 @@ export default function ProfilePage() {
     const [activeTab, setActiveTab] = useState("profile");
 
     if (!user) {
-        return <div className="profile-unauthorized">Unauthorized</div>;
+        return (
+            <div className="profile-unauthorized">
+                <h2>Unauthorized</h2>
+            </div>
+        );
     }
 
     return (
-        <div className="profile-page">
+        <div className="container">
 
             {/* HEADER */}
-            <div className="profile-header">
+            <div className="card profile-header">
                 <div className="profile-avatar">
                     {user.email[0].toUpperCase()}
                 </div>
 
                 <div>
-                    <h2 className="profile-name">{user.email}</h2>
-                    <p className="profile-subtitle">Аккаунт пользователя</p>
+                    <h2 className="title">{user.email}</h2>
+                    <p className="subtitle">Аккаунт пользователя</p>
                 </div>
             </div>
 
             {/* TAB MENU */}
             <div className="tabs">
-                <button className={activeTab === "profile" ? "active" : ""} onClick={() => setActiveTab("profile")}>
+                <button
+                    className={`tab ${activeTab === "profile" ? "active" : ""}`}
+                    onClick={() => setActiveTab("profile")}
+                >
                     Профиль
                 </button>
-                <button className={activeTab === "ads" ? "active" : ""} onClick={() => setActiveTab("ads")}>
+
+                <button
+                    className={`tab ${activeTab === "ads" ? "active" : ""}`}
+                    onClick={() => setActiveTab("ads")}
+                >
                     Мои объявления
                 </button>
-                <button className={activeTab === "favorites" ? "active" : ""} onClick={() => setActiveTab("favorites")}>
+
+                <button
+                    className={`tab ${activeTab === "favorites" ? "active" : ""}`}
+                    onClick={() => setActiveTab("favorites")}
+                >
                     Избранное
                 </button>
-                <button className={activeTab === "settings" ? "active" : ""} onClick={() => setActiveTab("settings")}>
+
+                <button
+                    className={`tab ${activeTab === "settings" ? "active" : ""}`}
+                    onClick={() => setActiveTab("settings")}
+                >
                     Настройки
                 </button>
             </div>
 
             {/* CONTENT */}
-            <div className="tab-content">
+            <div className="card tab-content">
                 {activeTab === "profile" && <ProfileInfo user={user} />}
                 {activeTab === "ads" && <MyAds />}
                 {activeTab === "favorites" && <Favorites />}

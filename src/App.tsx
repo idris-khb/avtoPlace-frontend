@@ -7,6 +7,7 @@ import "./index.css";
 import ProtectedRoute from "./components/ProtectedRoute.tsx";
 import ProfilePage from "./pages/ProfilePage.tsx";
 import {AuthProvider} from "./context/AuthContext.tsx";
+import CreateAd from "./pages/CreateAd";
 
 function App() {
     const [ads, setAds] = useState<CarAd[]>([]);
@@ -16,11 +17,13 @@ function App() {
     };
 
     return (
+        <div className="app">
         <AuthProvider>
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<HomePage ads={ads} />} />
                 <Route path="/register" element={<RegisterPage />} />
+                <Route path="/create-ad" element={<CreateAd />} />
                 <Route
                     path="/profile"
                     element={
@@ -32,6 +35,7 @@ function App() {
             </Routes>
         </BrowserRouter>
         </AuthProvider>
+        </div>
     );
 }
 

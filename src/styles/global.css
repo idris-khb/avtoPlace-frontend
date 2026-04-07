@@ -1,0 +1,138 @@
+/* === COLORS === */
+:root {
+    --bg-main: #f5f7fb;
+    --bg-card: #ffffff;
+
+    --primary: #4f46e5;
+    --primary-hover: #4338ca;
+
+    --danger: #ef4444;
+    --danger-hover: #dc2626;
+
+    --text-main: #111827;
+    --text-secondary: #6b7280;
+
+    --border: #e5e7eb;
+
+    --bg-color: #f5f5f5;
+}
+
+/* === BASE === */
+body {
+    margin: 0;
+    font-family: Inter, system-ui, sans-serif;
+    background: var(--bg-main);
+    color: var(--text-main);
+}
+
+/* === CONTAINER === */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+/* === CARD === */
+.card {
+    background: var(--bg-card);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+}
+
+/* === BUTTONS === */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 12px 20px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--primary-hover);
+}
+
+.btn-danger {
+    background: var(--danger);
+    color: white;
+}
+
+.btn-danger:hover {
+    background: var(--danger-hover);
+}
+
+/* === INPUTS === */
+.input {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    width: 100%;
+}
+
+/* === TITLE === */
+.title {
+    margin: 0;
+    font-size: 20px;
+}
+
+.subtitle {
+    color: var(--text-secondary);
+    margin-top: 4px;
+}
+
+.tab {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background: #e5e7eb;
+    cursor: pointer;
+    transition: 0.2s;
+    font-weight: 500;
+}
+
+.tab:hover {
+    background: #d1d5db;
+}
+
+.tab.active {
+    background: var(--primary);
+    color: white;
+}
+
+.app {
+    min-height: 100vh;
+    background: var(--bg-main);
+}
+
+.myads-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 300px;
+}
+
+.myads-list {
+    flex: 1; /* занимает всё доступное пространство */
+}
+
+.myads-footer {
+    display: flex;
+    justify-content: center; /* центр по горизонтали */
+    margin-top: 20px;
+}

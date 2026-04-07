@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import "./MyAds.css"
 
 export default function MyAds() {
     const navigate = useNavigate();
@@ -7,22 +6,19 @@ export default function MyAds() {
     return (
         <div className="myads-container">
 
-            {/* HEADER ВКЛАДКИ */}
-            <div className="myads-header">
-                <h3>Мои объявления</h3>
+            {/* LIST */}
+            <div className="myads-list">
+                <p className="subtitle">Пока нет объявлений</p>
+            </div>
 
+            {/* FOOTER BUTTON */}
+            <div className="myads-footer">
                 <button
-                    className="add-ad-btn"
+                    className="btn btn-primary"
                     onClick={() => navigate("/create-ad")}
                 >
                     + Добавить объявление
                 </button>
-            </div>
-
-            {/* СПИСОК ОБЪЯВЛЕНИЙ */}
-            <div className="myads-list">
-                {/* тут потом будут карточки */}
-                <p>Пока нет объявлений</p>
             </div>
 
         </div>
